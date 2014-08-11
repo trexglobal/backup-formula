@@ -9,7 +9,7 @@
 # For more information about Backup's components, see the documentation at:
 # http://meskyanichi.github.io/backup
 #
-Model.new(:{{ salt['grains.get']('id') }}, 'Main backup on {{ salt['grains.get']('id') }}') do
+Model.new('{{ salt['grains.get']('id') }}', 'Main backup on {{ salt['grains.get']('id') }}') do
 
   ##
   # Amazon Simple Storage Service [Storage]
