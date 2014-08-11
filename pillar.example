@@ -2,6 +2,18 @@ mysql:
   pass:
     root: somePass
 
+mail_alert:
+  account:
+    server: smtp.gmail.com
+    port: 587
+    email: some@example.com
+    password: p@ssw0rd;)
+    authentication: plain
+    domain: example.com
+  users:
+    - first@example.com
+    - second@example.com
+
 backup:
   s3:
     bucket: some-aws-bucket
@@ -9,11 +21,3 @@ backup:
     access_key_id: 8df98fdugsdfkjghdfsjkgsd
     secret_access_key: sd98fgu89fsdug89sdfug89dfsug
     path: DatabaseBackups
-  mail:
-    domain: example.com
-    from: machine@example.com
-    to: root@example.com
-    address: smtp.gmail.com
-    port: 587
-    authentication: plain
-    password: my_password

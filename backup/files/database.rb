@@ -41,13 +41,13 @@ Model.new(:database, 'Main backup on {{ salt['grains.get']('id') }}') do
     mail.on_warning           = true
     mail.on_failure           = true
 
-    mail.domain               = "{{ pillar['backup']['mail']['domain'] }}"
-    mail.from                 = "{{ pillar['backup']['mail']['from'] }}"
-    mail.to                   = "{{ pillar['backup']['mail']['to'] }}"
-    mail.address              = "{{ pillar['backup']['mail']['address'] }}"
-    mail.port                 = "{{ pillar['backup']['mail']['port'] }}"
-    mail.authentication       = "{{ pillar['backup']['mail']['authentication'] }}"
-    mail.password             = "{{ pillar['backup']['mail']['password'] }}"
+    mail.domain               = "{{ pillar['mail_alert']['account']['domain'] }}"
+    mail.from                 = "{{ pillar['mail_alert']['account']['email'] }}"
+    mail.to                   = "{{ pillar['mail_alert']['users'] | join(', ') }}"
+    mail.address              = "{{ pillar['mail_alert']['account']['address'] }}"
+    mail.port                 = "{{ pillar['mail_alert']['account']['port'] }}"
+    mail.authentication       = "{{ pillar['mail_alert']['account']['authentication'] }}"
+    mail.password             = "{{ pillar['mail_alert']['account']['password'] }}"
   end
 
   database MySQL do |db|
