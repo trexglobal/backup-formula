@@ -32,7 +32,7 @@ backup:
     - user: root
     - group: root
     - mode: 440
-    - source: salt://files/database.rb
+    - source: salt://backup/files/database.rb
     - require:
       - file: /root/Backup/models
 
@@ -40,7 +40,7 @@ backup:
 /usr/local/bin/run-backup:
   file:
     - managed
-    - source: salt://files/run-backup
+    - source: salt://backup/files/run-backup
     - user: root
     - group: root
     - mode: 0777
@@ -51,4 +51,4 @@ backup:
     - user: root
     - group: root
     - mode: 755
-    - source: salt://files/00_database_backup_to_s3
+    - source: salt://backup/files/00_database_backup_to_s3
