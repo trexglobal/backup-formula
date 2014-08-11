@@ -42,6 +42,7 @@ Model.new(:database, 'Main backup on {{ salt['grains.get']('id') }}') do
     mail.on_failure           = true
 
     mail.domain               = "{{ pillar['mail_alert']['account']['domain'] }}"
+    mail.user_name            = "{{ pillar['mail_alert']['account']['email'] }}"
     mail.from                 = "{{ pillar['mail_alert']['account']['email'] }}"
     mail.to                   = "{{ pillar['mail_alert']['users'] | join(', ') }}"
     mail.address              = "{{ pillar['mail_alert']['account']['server'] }}"
