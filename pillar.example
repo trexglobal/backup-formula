@@ -1,0 +1,19 @@
+mysql:
+  pass:
+    root: somePass
+
+backup:
+  s3:
+    bucket: some-aws-bucket
+    region: us-east-1
+    access_key_id: 8df98fdugsdfkjghdfsjkgsd
+    secret_access_key: sd98fgu89fsdug89sdfug89dfsug
+    path: DatabaseBackups
+  mail:
+    domain: example.com
+    from: machine@example.com
+    to: root@example.com
+    address: smtp.gmail.com
+    port: 587
+    authentication: plain
+    password: my_password
