@@ -44,7 +44,7 @@ Model.new(:database, 'Main backup on {{ salt['grains.get']('id') }}') do
     mail.domain               = "{{ pillar['mail_alert']['account']['domain'] }}"
     mail.from                 = "{{ pillar['mail_alert']['account']['email'] }}"
     mail.to                   = "{{ pillar['mail_alert']['users'] | join(', ') }}"
-    mail.address              = "{{ pillar['mail_alert']['account']['address'] }}"
+    mail.address              = "{{ pillar['mail_alert']['account']['server'] }}"
     mail.port                 = "{{ pillar['mail_alert']['account']['port'] }}"
     mail.authentication       = "{{ pillar['mail_alert']['account']['authentication'] }}"
     mail.password             = "{{ pillar['mail_alert']['account']['password'] }}"
