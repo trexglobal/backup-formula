@@ -5,10 +5,12 @@ Setup backup for all databases on the server using https://meskyanichi.github.io
 
 ## What it does
 
-1. Install ruby and ruby-dev dependencies
-2. Install backup gem
-3. Add backup model
-4. Add backup to daily tasks
+1. backup
+1.1. Install ruby and ruby-dev dependencies
+1.2. Install backup gem
+2. backup.all
+2.1. Add backup model for all databases
+2.2. Add backup to daily tasks
 
 ## Install
 
@@ -17,7 +19,7 @@ Setup backup for all databases on the server using https://meskyanichi.github.io
 
   ```yaml
   include:
-      - backup
+      - backup.all
   ```
 
   or to the [top.sls](http://docs.saltstack.com/en/latest/ref/states/top.html) file
@@ -25,5 +27,5 @@ Setup backup for all databases on the server using https://meskyanichi.github.io
   ```yaml
   base:
     'some.server.example.com':
-      - backup
+      - backup.all
   ```
