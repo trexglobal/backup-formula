@@ -50,6 +50,7 @@ backup:
 /usr/local/bin/run-backup:
   file:
     - managed
+    - template: jinja
     - source: salt://backup/files/run-backup
     - user: root
     - group: root
