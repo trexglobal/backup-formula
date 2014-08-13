@@ -1,5 +1,5 @@
 include:
-  - .
+  - backup
 
 # Backup model for all mysql databases
 /root/Backup/models/all.rb:
