@@ -43,5 +43,6 @@ backup:
     - user: root
     - group: root
     - mode: 0755
+    - template: jinja
     - require:
       - pkg: s3cmd
