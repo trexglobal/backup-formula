@@ -5,6 +5,7 @@ ruby_pkgs:
       - ruby-dev
       - make
       - g++
+      - s3cmd
 
 backup:
   gem:
@@ -34,3 +35,15 @@ backup:
     - mode: 0755
     - require:
       - file: /root/Backup
+
+# Adding s3cmd config file
+/root/.s3cfg:
+  file:
+    - managed
+    - source: salt://php-apps/files/aws/s3cfg
+    - user: root
+    - group: root
+    - mode: 0750
+    - template: jinja
+    - require:
+      - pkg: s3cmd
