@@ -39,7 +39,7 @@ backup:
 /usr/local/bin/backup-recover.sh:
   file:
     - managed
-    - source: salt://php-apps/files/usr/local/bin/backup-recover.sh
+    - source: salt://backup/files/backup-recover.sh
     - user: root
     - group: root
     - mode: 0755
