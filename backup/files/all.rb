@@ -54,7 +54,7 @@ Model.new('{{ salt['grains.get']('id') }}', 'Main backup on {{ salt['grains.get'
   database MySQL do |db|
     db.name               = :all
     db.username           = "root"
-    db.password           = "{{ pillar['mysql']['pass']['root'] }}"
+    db.password           = "{{ pillar['mysql']['server']['root_password'] }}"
     db.host               = "localhost"
     db.port               = 3306
     db.additional_options = "--events --ignore-table=mysql.event"
