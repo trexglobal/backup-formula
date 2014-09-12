@@ -26,7 +26,7 @@ mkdir -p "$tmp_folder"
 cd "$tmp_folder"
 
 echo "Removing previously downladed backup"
-rm -rf "${tmp_folder}/*"
+rm -rf "${tmp_folder}/${server_id}"
 
 echo "Downloading backup data for ${selected_date}"
 timestamp="${selected_date}*"
@@ -49,6 +49,6 @@ echo "Loading data into database"
 zcat ${server_id}/databases/MySQL.sql.gz | mysql $database_name
 
 echo "Cleaning up recovery data"
-rm -rf "${tmp_folder}/*"
+rm -rf "${tmp_folder}/${server_id}"
 
 echo "Done"
