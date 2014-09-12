@@ -40,7 +40,7 @@ backup:
 /root/.s3cfg:
   file:
     - managed
-    - source: salt://php-apps/files/aws/s3cfg
+    - source: salt://backup/files/s3cfg
     - user: root
     - group: root
     - mode: 0750
