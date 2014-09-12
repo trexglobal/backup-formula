@@ -9,7 +9,11 @@
 # With argument you can controll for which date you want to download db
 ## e.g. 2013.01.10
 
-tmp_folder=/data/tmp
+tmp_folder=/tmp
+project_name={{ pillar['app']['name'] }}
+backup_s3_bucket={{ pillar['backup']['s3']['bucket'] }}
+backup_s3_path={{ pillar['backup']['s3']['path'] }}
+server_id={{ salt['grains.get']('id') }}
 
 if [ "$#" == 0 ]
 then
@@ -21,13 +25,13 @@ fi
 cd "$tmp_folder"
 
 echo "Removing previously downladed backup"
-rm -rf all_database
+rm -rf "$server_id"
 
 echo "Downloading backup data for ${selected_date}"
 timestamp="${selected_date}*"
-database_name="trex_production_$(echo ${selected_date} | sed 's/\.//g')"
+database_name="${project_name}_$(echo ${selected_date} | sed 's/\.//g')"
 
-s3cmd get --skip-existing "s3://sfym-live-trexglobal/DatabaseBackups/sfym_database/${timestamp}/sfym_database.tar"
+s3cmd get --skip-existing "s3://${backup_s3_bucket}/${backup_s3_path}/${server_id}/${timestamp}/${server_id}.tar"
 
 selected_backup=$(ls -dt ${timestamp} | head -1)
 
@@ -41,8 +45,8 @@ mysqladmin -f drop $database_name
 mysqladmin create $database_name
 
 echo "Loading data into database"
-zcat sfym_database/databases/MySQL.sql.gz | mysql $database_name
+zcat ${server_id}/databases/MySQL.sql.gz | mysql $database_name
 
-rm -rf sfym_database
+rm -rf "$server_id"
 
 echo "Done"

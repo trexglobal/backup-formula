@@ -1,6 +1,9 @@
+app:
+  name: 'someapp'
+
 mysql:
-  pass:
-    root: somePass
+  server:
+    root_password: 'somePass'
 
 mail_alert:
   account:
