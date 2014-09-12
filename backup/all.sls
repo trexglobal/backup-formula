@@ -10,19 +10,19 @@ include:
     - group: root
     - mode: 440
     - source: salt://backup/files/all.rb
-    - require:
-      - file: /root/Backup/models
+    - makedirs: True
 
 # Simple script to run backup command
-/usr/local/bin/backup-all:
+/usr/local/bin/backup-all.sh:
   file:
     - managed
     - template: jinja
-    - source: salt://backup/files/backup-all
+    - source: salt://backup/files/backup-all.sh
     - user: root
     - group: root
     - mode: 0777
 
+# Add daily backup task
 /etc/cron.daily/00_database_backup_to_s3:
   file:
     - managed

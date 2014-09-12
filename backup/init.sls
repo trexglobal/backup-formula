@@ -1,3 +1,4 @@
+# Install required packages
 ruby_pkgs:
   pkg.installed:
     - names:
@@ -7,16 +8,12 @@ ruby_pkgs:
       - g++
       - s3cmd
 
+# Install backup gem
 backup:
   gem:
     - installed
 
-/root/Backup:
-  file.directory:
-    - user: root
-    - group: root
-    - mode: 0755
-
+# Add generic backup configuration
 /root/Backup/config.rb:
   file:
     - managed
@@ -24,17 +21,7 @@ backup:
     - group: root
     - mode: 440
     - source: salt://backup/files/config.rb
-    - require:
-      - file: /root/Backup
-
-
-/root/Backup/models:
-  file.directory:
-    - user: root
-    - group: root
-    - mode: 0755
-    - require:
-      - file: /root/Backup
+    - makedirs: True
 
 # Adding s3cmd config file
 /root/.s3cfg:
@@ -45,5 +32,16 @@ backup:
     - group: root
     - mode: 0750
     - template: jinja
+    - require:
+      - pkg: s3cmd
+
+# Adding backup recover script
+/usr/local/bin/backup-recover.sh:
+  file:
+    - managed
+    - source: salt://php-apps/files/usr/local/bin/backup-recover.sh
+    - user: root
+    - group: root
+    - mode: 0755
     - require:
       - pkg: s3cmd
