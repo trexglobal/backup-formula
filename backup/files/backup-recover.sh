@@ -9,7 +9,7 @@
 # With argument you can controll for which date you want to download db
 ## e.g. 2013.01.10
 
-tmp_folder=/tmp
+tmp_folder=/tmp/backup
 project_name={{ pillar['app']['name'] }}
 backup_s3_bucket={{ pillar['backup']['s3']['bucket'] }}
 backup_s3_path={{ pillar['backup']['s3']['path'] }}
@@ -22,10 +22,11 @@ else
   selected_date=$1
 fi
 
+mkdir -p "$tmp_folder"
 cd "$tmp_folder"
 
 echo "Removing previously downladed backup"
-rm -rf "$server_id"
+rm -rf "${tmp_folder}/*"
 
 echo "Downloading backup data for ${selected_date}"
 timestamp="${selected_date}*"
@@ -38,7 +39,7 @@ selected_backup=$(ls -dt ${timestamp} | head -1)
 echo "There were two backups, auto selecting ${selected_backup}"
 
 echo "Unpacking backup data"
-tar -xvf "${selected_backup}/all_database.tar"
+tar -xvf "${selected_backup}/${server_id}.tar"
 
 echo "Creating database"
 mysqladmin -f drop $database_name
@@ -47,6 +48,7 @@ mysqladmin create $database_name
 echo "Loading data into database"
 zcat ${server_id}/databases/MySQL.sql.gz | mysql $database_name
 
-rm -rf "$server_id"
+echo "Cleaning up recovery data"
+rm -rf "${tmp_folder}/*"
 
 echo "Done"
