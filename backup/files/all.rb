@@ -30,6 +30,7 @@ Model.new('{{ salt['grains.get']('id') }}', 'Main backup on {{ salt['grains.get'
   #
   compress_with Gzip
 
+{% if pillar['mail_alert'] is defined %}
   ##
   # Mail [Notifier]
   #
@@ -50,6 +51,7 @@ Model.new('{{ salt['grains.get']('id') }}', 'Main backup on {{ salt['grains.get'
     mail.authentication       = "{{ pillar['mail_alert']['account']['authentication'] }}"
     mail.password             = "{{ pillar['mail_alert']['account']['password'] }}"
   end
+{% endif %}
 
   database MySQL do |db|
     db.name               = :all
