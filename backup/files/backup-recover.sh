@@ -45,8 +45,14 @@ echo "Creating database"
 mysqladmin -f drop $database_name
 mysqladmin create $database_name
 
+echo "Disabling monit just in case"
+monit unmonitor mysql
+
 echo "Loading data into database"
 zcat ${server_id}/databases/MySQL.sql.gz | mysql $database_name
+
+echo "Enabling monit"
+monit monitor mysql
 
 echo "Cleaning up recovery data"
 rm -rf "${tmp_folder}/${server_id}"
