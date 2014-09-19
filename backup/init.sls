@@ -1,3 +1,5 @@
+{% if pillar['backup'] is defined %}
+
 # Install required packages
 ruby_pkgs:
   pkg.installed:
@@ -46,3 +48,5 @@ backup:
     - template: jinja
     - require:
       - pkg: s3cmd
+
+{% endif %}

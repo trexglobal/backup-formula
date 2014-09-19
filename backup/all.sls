@@ -1,3 +1,5 @@
+{% if pillar['backup'] is defined %}
+
 include:
   - backup
 
@@ -21,3 +23,5 @@ include:
     - user: root
     - group: root
     - mode: 0777
+
+{% endif %}
