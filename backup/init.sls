@@ -37,8 +37,10 @@ backup:
     - require:
       - pkg: s3cmd
 
+{% for app in salt['pillar.get']('php_apps', []) %}
+
 # Adding backup recover script
-/usr/local/bin/backup-recover.sh:
+/usr/local/bin/backup-{{ app.name }}-recover.sh:
   file:
     - managed
     - source: salt://backup/files/backup-recover.sh
@@ -48,5 +50,9 @@ backup:
     - template: jinja
     - require:
       - pkg: s3cmd
+    - context:
+        project_name: {{ app.name }}
+
+{% endfor %}
 
 {% endif %}

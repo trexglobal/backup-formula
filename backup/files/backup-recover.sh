@@ -10,7 +10,7 @@
 ## e.g. 2013.01.10
 
 tmp_folder=/tmp/backup
-project_name={{ pillar['app']['name'] }}
+project_name={{ project_name }}
 backup_s3_bucket={{ pillar['backup']['s3']['bucket'] }}
 backup_s3_path={{ pillar['backup']['s3']['path'] }}
 server_id={{ salt['grains.get']('id') }}
