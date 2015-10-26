@@ -8,12 +8,14 @@ ruby_pkgs:
       - ruby-dev
       - make
       - g++
+      - zlib1g-dev
       - s3cmd
 
 # Install backup gem
-backup:
-  gem:
-    - installed
+install_backup:
+    gem.installed:
+      - name: backup
+      - version: 4.1.2
 
 # Add generic backup configuration
 /root/Backup/config.rb:
