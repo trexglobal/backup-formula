@@ -61,5 +61,13 @@ Model.new('{{ salt['grains.get']('id') }}', 'Main backup on {{ salt['grains.get'
     db.port               = 3306
     db.additional_options = "--events --ignore-table=mysql.event"
   end
-
+  
+  {% if pillar['mongodb'] is defined %}
+  database MongoDB do |db|
+    db.name               = {{ pillar['mongodb']['db_name'] }}
+    db.host               = "localhost"
+    db.port               = 27017
+  end
+  {% endif %}
+  
 end
