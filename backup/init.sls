@@ -39,7 +39,7 @@ install_backup:
     - require:
       - pkg: s3cmd
 
-{% for app in salt['pillar.get']('php_apps', []) %}
+{% for id, app in salt['pillar.get']('php_apps', {}).items() %}
 
 # Adding backup recover script
 /usr/local/bin/backup-{{ app.name }}-recover.sh:
