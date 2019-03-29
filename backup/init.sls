@@ -15,7 +15,7 @@ ruby_pkgs:
 install_backup:
     gem.installed:
       - name: backup
-      - version: 4.1.2
+      - version: {{ salt['pillar.get']('backup:version', '4.1.2') }}
 
 # Add generic backup configuration
 /root/Backup/config.rb:
