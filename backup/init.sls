@@ -24,7 +24,7 @@ install_backup:
     - user: root
     - group: root
     - mode: 440
-    - source: salt://backup/files/config.rb
+    - source: {{ salt['pillar.get']('backup:config_path', 'salt://backup/files/config.rb') }}
     - makedirs: True
 
 # Adding s3cmd config file
